@@ -1,0 +1,238 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="/static/css/app.css">
+  <!--<link rel="stylesheet" media="screen" href ="static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/bootstrap-theme.min.css">-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <style type="text/css">
+    .box{
+        padding: 20px;
+        display: none;
+        margin-top: 20px;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("select").change(function(){
+        $(this).find("option:selected").each(function(){
+            var optionValue = $(this).attr("value");
+            if(optionValue){
+                $(".box").not("." + optionValue).hide();
+                $("." + optionValue).show();
+            } else{
+                $(".box").hide();
+            }
+        });
+    }).change();
+});
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+  $('.dropdown-menu li a').click(function(){
+    //alert("Asd");
+    $(this).parents('.dropdown').find('.btn').html($(this).text() + ' <span class="caret"></span>');
+    $(this).parents('.dropdown').find('.btn').val($(this).data('value'));
+
+    var selText = $(this).attr('data-value');
+    var selectedDropdown = $(this).parents('.dropdown').attr('id');
+    if(selectedDropdown == 'model') {
+      //get all divs not equal to seltext.. hide them
+      $(this).parents('btn-group').siblings('.div').not(document.getElementById(selText)).hide();
+      $('.' + selText).show("slow");
+
+      //$( "li" ).not( document.getElementById( "notli" ) )
+    } else {
+      $('.' + selText).hide();
+    }
+    $(this).parents('.btn-group').siblings('.menu').html(selText)
+
+    //if(selText) {
+    //   $( '.Logistic' ).show( "slow" );
+    //}
+   
+
+    /*if(selText) {
+      $('.box').not('.' + selText).hide();
+      //$("." + selText).show();
+    } else {
+      $('.box').hide();
+    }*/
+
+  });
+});
+
+
+</script>
+</head>     
+
+<body id="grad1">
+
+  <form action = "http://localhost:5000/hello" method="POST"> 
+  <br><br><br><br>
+    <div class="btn-group">
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          Select Data
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li><a href="#" data-value="action">HDFS</a></li>
+          <li><a href="#" data-value="another action">Openstackn</a></li>
+          <li><a href="#" data-value="something else here">Type3</a></li>
+        </ul>
+    </div>
+    <br><br><br><br>
+    <div class="btn-group">
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          Select Encoding
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li><a href="#" data-value="action">HDFS</a></li>
+          <li><a href="#" data-value="another action">Openstackn</a></li>
+          <li><a href="#" data-value="something else here">Type3</a></li>
+        </ul>
+      </div>
+    </div>
+    <br><br><br><br>
+    <div class="btn-group">
+      <div class="dropdown"  id="model">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          Choose Model
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li><a href="#" data-value="logistic">Logistic Regression</a></li>
+          <li><a href="#" data-value="decision Tree">Decision Tree</a></li>
+          <li><a href="#" data-value="svm">SVM</a></li>
+          <li><a href="#" data-value="pca">PCA</a></li>
+          <li><a href="#" data-value="inmining">Invariants mining</a></li>
+          <li><a href="#" data-value="logcluster">Log Clustering</a></li>
+          <li><a href="#" data-value="gru">GRU</a></li>
+          <li><a href="#" data-value="lstm">LSTM</a></li>
+          <li><a href="#" data-value="srn">SRN</a></li>
+        </ul>
+      </div>
+    </div>
+     <p class="menu">Options:</p>
+    <div class="logistic">You have selected Logistic Regression<br><br>
+      <div class="form-group  col-md-3">
+        <label for="parameter1">Parameter 1:</label>
+        <input type="text" class="form-control" id="parameter1" name="parameter1" placeholder="Parameter 1">
+        <br>
+        <label for="parameter2">Parameter 2:</label>
+        <input type="text" class="form-control" id="parameter2" name="parameter2" placeholder="Parameter 2">
+        <br>
+        <label for="parameter3">Parameter 3:</label>
+        <input type="text" class="form-control" id="parameter3" name="parameter3" placeholder="Parameter 3">
+        <br><br><br><br>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+    <div class="decision">You have selected Decision Tree<br><br>
+      <div class="form-group  col-md-3">
+        <label for="parameter1">Parameter 1:</label>
+        <input type="text" class="form-control" id="parameter1" name="parameter1" placeholder="Parameter 1">
+        <br>
+        <label for="parameter2">Parameter 2:</label>
+        <input type="text" class="form-control" id="parameter2" name="parameter2" placeholder="Parameter 2">
+        <br><br><br><br>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+    <div class="svm">You have selected SVM<br><br>
+      <div class="form-group  col-md-3">
+        <label for="parameter1">Parameter 1:</label>
+        <input type="text" class="form-control" id="parameter1" name="parameter1" placeholder="Parameter 1">
+        <br>
+        <label for="parameter2">Parameter 2:</label>
+        <input type="text" class="form-control" id="parameter2" name="parameter2" placeholder="Parameter 2">
+        <br><br><br><br>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+    <div class="pca">You have selected PCA<br><br>
+      <div class="form-group  col-md-3">
+        <label for="parameter1">Parameter 1:</label>
+        <input type="text" class="form-control" id="parameter1" name="parameter1" placeholder="Parameter 1">
+        <br>
+        <label for="parameter2">Parameter 2:</label>
+        <input type="text" class="form-control" id="parameter2" name="parameter2" placeholder="Parameter 2">
+        <br><br><br><br>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+    <div class="inmining">You have selected Invariants mining<br><br>
+      <div class="form-group  col-md-3">
+        <label for="parameter1">Parameter 1:</label>
+        <input type="text" class="form-control" id="parameter1" name="parameter1" placeholder="Parameter 1">
+        <br>
+        <label for="parameter2">Parameter 2:</label>
+        <input type="text" class="form-control" id="parameter2" name="parameter2" placeholder="Parameter 2">
+        <br><br><br><br>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+    <div class="logcluster">You have selected Log clustering<br><br>
+      <div class="form-group  col-md-3">
+        <label for="parameter1">Parameter 1:</label>
+        <input type="text" class="form-control" id="parameter1" name="parameter1" placeholder="Parameter 1">
+        <br>
+        <label for="parameter2">Parameter 2:</label>
+        <input type="text" class="form-control" id="parameter2" name="parameter2" placeholder="Parameter 2">
+        <br><br><br><br>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+    <div class="gru">You have selected GRU<br><br>
+      <div class="form-group  col-md-3">
+        <label for="parameter1">Parameter 1:</label>
+        <input type="text" class="form-control" id="parameter1" name="parameter1" placeholder="Parameter 1">
+        <br>
+        <label for="parameter2">Parameter 2:</label>
+        <input type="text" class="form-control" id="parameter2" name="parameter2" placeholder="Parameter 2">
+        <br><br><br><br>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+    <div class="lstm">You have selected LSTM<br><br>
+      <div class="form-group  col-md-3">
+        <label for="parameter1">Parameter 1:</label>
+        <input type="text" class="form-control" id="parameter1" name="parameter1" placeholder="Parameter 1">
+        <br>
+        <label for="parameter2">Parameter 2:</label>
+        <input type="text" class="form-control" id="parameter2" name="parameter2" placeholder="Parameter 2">
+        <br><br><br><br>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+    <div class="srn">You have selected SRN<br><br>
+      <div class="form-group  col-md-3">
+        <label for="parameter1">Parameter 1:</label>
+        <input type="text" class="form-control" id="parameter1" name="parameter1" placeholder="Parameter 1">
+        <br>
+        <label for="parameter2">Parameter 2:</label>
+        <input type="text" class="form-control" id="parameter2" name="parameter2" placeholder="Parameter 2">
+        <br><br><br><br>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+
+  <br><br><br><br>
+  <!--<button id="b1" class="button" style="vertical-align:middle"><span>Run Model</span></button>-->
+  
+  </form>
+
+<script type="text/javascript" src="/static/js/app.js"></script>
+
+</body>
+</html>
